@@ -1,4 +1,4 @@
-image: node:8.10.0
+image: node:12.18.4
 
 cache:
   paths:
@@ -10,18 +10,25 @@ stages:
 
 Lint:
   stage: pre_deploy
+  except:
+    - main
+  allow_failure: true
   script:
     - npm install
     - npm run lint
 
 UnitTest:
   stage: pre_deploy
+  except:
+    - main
   script:
     - npm install
     - npm run test
 
 Production:
   image: ruby:latest
+  only:
+    - main
   stage: deploy_production
   script:
     - apt-get update -qy
