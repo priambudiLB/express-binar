@@ -5,7 +5,13 @@ cache:
     - node_modules/
 
 stages:
+  - install
   - deploy_production
+
+Install:
+  stage: install
+  script:
+    - npm install
 
 Production:
   image: ruby:latest
