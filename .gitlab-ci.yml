@@ -8,19 +8,16 @@ stages:
   - pre_deploy
   - deploy_production
 
-Install:
-  stage: pre_deploy
-  script:
-    - npm install
-
 Lint:
   stage: pre_deploy
   script:
+    - npm install
     - npm run lint
 
 UnitTest:
   stage: pre_deploy
   script:
+    - npm install
     - npm run test
 
 Production:
