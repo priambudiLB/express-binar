@@ -5,13 +5,23 @@ cache:
     - node_modules/
 
 stages:
-  - install
+  - pre_deploy
   - deploy_production
 
 Install:
-  stage: install
+  stage: pre_deploy
   script:
     - npm install
+
+Lint:
+  stage: pre_deploy
+  script:
+    - npm run lint
+
+UnitTest:
+  stage: pre_deploy
+  script:
+    - npm run test
 
 Production:
   image: ruby:latest
