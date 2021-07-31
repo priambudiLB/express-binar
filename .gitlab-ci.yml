@@ -6,6 +6,7 @@ cache:
 
 stages:
   - pre_deploy
+  - deploy_staging
   - deploy_production
 
 Lint:
@@ -25,7 +26,18 @@ UnitTest:
     - npm install
     - npm run test
 
-Production:
+DeploymentStaging:
+  image: ruby:latest
+  only:
+    - main
+  stage: deploy_production
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=binar-express --api-key=$HEROKU_API_KEY
+
+DeploymentProduction:
   image: ruby:latest
   only:
     - main
