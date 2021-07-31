@@ -29,7 +29,7 @@ UnitTest:
 DeploymentStaging:
   image: ruby:latest
   only:
-    - main
+    - staging
   stage: deploy_production
   script:
     - apt-get update -qy
